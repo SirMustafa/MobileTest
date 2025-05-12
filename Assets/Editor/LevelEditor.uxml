@@ -1,13 +1,31 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Editor/LevelEditor.uss?fileID=7433441132597879392&amp;guid=0e0e7c7129761fc45bbc493282075f2d&amp;type=3#LevelEditor" />
     <ui:Label text="Level Editor 1.0" class="custom-label" style="width: 1080px; height: 50px;" />
-    <ui:SliderInt name="WidthSlider" label="Width" value="5" low-value="1" high-value="50" fill="true" />
-    <ui:Label name="WidthValue" text="5" class="custom-label" style="width: 1080px; height: 20px; font-size: 15px; color: rgb(255, 255, 255);" />
-    <ui:SliderInt name="HeightSlider" label="Height" value="5" low-value="1" high-value="50" fill="true" />
-    <ui:Label name="HeightValue" text="5" class="custom-label" style="width: 1080px; height: 20px; font-size: 15px; color: rgb(255, 255, 255);" />
-    <uie:ObjectField name="TilePrefabField" label="Tile Prefab" />
-    <uie:ObjectField name="ParentObjField" label="Parent Object" />
-    <ui:Button text="Draw Level" name="DrawButton" />
-    <ui:Button text="Clear Level" name="ClearButton" />
-    <ui:Button text="Save Level" name="SaveButton" />
+    <ui:VisualElement name="SlidersReferences" style="flex-grow: 1;">
+        <ui:SliderInt name="WidthSlider" label="Width" value="17" low-value="1" high-value="50" fill="true" />
+        <ui:Label name="WidthValue" text="17" class="custom-label" style="width: 1080px; height: 20px; font-size: 15px; color: rgb(255, 255, 255);" />
+        <ui:SliderInt name="HeightSlider" label="Height" value="15" low-value="1" high-value="50" fill="true" />
+        <ui:Label name="HeightValue" text="15" class="custom-label" style="width: 1080px; height: 20px; font-size: 15px; color: rgb(255, 255, 255);" />
+        <uie:ObjectField name="TilePrefabField" label="Tile Prefab" />
+        <uie:ObjectField name="ParentObjField" label="Parent Object" />
+    </ui:VisualElement>
+    <ui:VisualElement name="ObjectsFields" style="flex-direction: row; justify-content: flex-start; gap: 8px; padding: 4px 0; flex-basis: 30%; flex-wrap: wrap;">
+        <uie:ObjectField name="SlotField1" label="Slot 1" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 120px;" />
+        <uie:ObjectField name="SlotField2" label="Slot 2" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 120px;" />
+        <uie:ObjectField name="SlotField3" label="Slot 3" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 120px;" />
+        <uie:ObjectField name="SlotField4" label="Slot 4" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 120px;" />
+        <uie:ObjectField name="SlotField5" label="Slot 5" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 10%;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Buttons" style="flex-grow: 1;">
+        <ui:Button text="Draw Level" name="DrawButton" />
+        <ui:Button text="Clear Level" name="ClearButton" />
+        <ui:Button text="Save Level" name="SaveButton" />
+        <ui:VisualElement name="Slots" style="flex-grow: 1;">
+            <ui:RadioButton label="Radio Button" name="Slot1" />
+            <ui:RadioButton label="Radio Button" name="Slot2" />
+            <ui:RadioButton label="Radio Button" name="Slot3" />
+            <ui:RadioButton label="Radio Button" name="Slot4" />
+            <ui:RadioButton label="Radio Button" name="Slot5" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
