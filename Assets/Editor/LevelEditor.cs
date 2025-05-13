@@ -113,6 +113,7 @@ public class LevelEditor : EditorWindow
 
     private void ClearLvl()
     {
+        parentObj = parentObjField.value as GameObject;
         if (parentObj == null) return;
         for (int i = parentObj.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(parentObj.transform.GetChild(i).gameObject);
@@ -132,7 +133,7 @@ public class LevelEditor : EditorWindow
 
     private void OnSceneGUI(SceneView view)
     {
-        if (focusedWindow != this) return;
+       // if (focusedWindow != this) return;
         var e = Event.current;
         if (e.type == EventType.MouseDown && e.button == 0)
         {
@@ -167,12 +168,16 @@ public class LevelEditor : EditorWindow
     {
         if (prefab == null || parentObj == null) return;
 
-        float x = Mathf.Round(rawPos.x * 2f) / 2f;
-        float z = Mathf.Round(rawPos.z * 2f) / 2f;
+        float x = Mathf.Round(rawPos.x);
+        float z = Mathf.Round(rawPos.z);
+        x += 0.5f;
+        z += 0.5f;
+
         var go = Instantiate(prefab);
         go.transform.position = new Vector3(x, 0f, z);
         go.transform.SetParent(parentObj.transform, true);
     }
+
     private void OnDisable()
     {
         SceneView.duringSceneGui -= OnSceneGUI;
