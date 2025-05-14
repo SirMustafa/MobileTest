@@ -81,7 +81,7 @@ public class LevelEditor : EditorWindow
 
     private void OnSceneGUI(SceneView view)
     {
-        //if (focusedWindow != this) return;
+        if (focusedWindow != this) return;
         var e = Event.current;
         if (e.type == EventType.MouseDown && e.button == 0)
         {
