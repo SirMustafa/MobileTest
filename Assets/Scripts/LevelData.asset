@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dcd342bb9bbcd54f8cb53c848394022, type: 3}
-  m_Name: SO4x11
+  m_Name: LevelData
   m_EditorClassIdentifier: 
-  width: 4
-  height: 11
+  width: 17
+  height: 15

@@ -15,11 +15,13 @@
         <uie:ObjectField name="SlotField3" label="Slot 3" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 120px;" />
         <uie:ObjectField name="SlotField4" label="Slot 4" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 120px;" />
         <uie:ObjectField name="SlotField5" label="Slot 5" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 10%;" />
+        <uie:ObjectField name="LevelData" label="LevelData" object-type="UnityEngine.GameObject" style="flex-grow: 1; min-width: 10%;" />
     </ui:VisualElement>
     <ui:VisualElement name="Buttons" style="flex-grow: 1;">
         <ui:Button text="Draw Level" name="DrawButton" />
         <ui:Button text="Clear Level" name="ClearButton" />
         <ui:Button text="Save Level" name="SaveButton" />
+        <ui:Button text="LoadLevel" name="LoadButton" />
         <ui:VisualElement name="Slots" style="flex-grow: 1;">
             <ui:RadioButton label="Radio Button" name="Slot1" />
             <ui:RadioButton label="Radio Button" name="Slot2" />

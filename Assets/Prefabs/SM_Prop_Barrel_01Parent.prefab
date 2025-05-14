@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1020125122666693394}
   - component: {fileID: 8862594217455180109}
   - component: {fileID: 6380570172754740820}
-  - component: {fileID: 4294903412293184362}
+  - component: {fileID: 6905301198421941251}
   m_Layer: 0
   m_Name: SM_Prop_Barrel_01
   m_TagString: Untagged
@@ -87,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4294903412293184362
+--- !u!64 &6905301198421941251
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

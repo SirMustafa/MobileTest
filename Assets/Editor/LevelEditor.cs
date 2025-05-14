@@ -2,35 +2,34 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using System.Collections.Generic;
 
 public class LevelEditor : EditorWindow
 {
-    [SerializeField] private VisualTreeAsset m_VisualTreeAsset = default;
+    [SerializeField] private VisualTreeAsset uiAsset = default;
+
+    private List<GameObject> placedPrefabs = new();
+    private List<Vector2> placedPositions = new();
 
     private SliderInt widthSlider;
     private SliderInt heightSlider;
     private Label widthLabel;
     private Label heightLabel;
     private ObjectField tilePrefabField;
-    private ObjectField parentObjField;
     private ObjectField cornerPrefabField;
-    private Button drawButton;
-    private Button saveButton;
-    private Button clearButton;
-
+    private ObjectField parentObjField;
+    private ObjectField levelDataSOField;
+    private Button drawButton, clearButton, saveButton, loadButton;
     private ObjectField[] slotFields = new ObjectField[5];
     private RadioButton[] slotRadios = new RadioButton[5];
-    private int selectedSlot = -1;
 
-    private GameObject tilePrefab;
-    private GameObject parentObj;
-    private GameObject cornerPrefab;
+    private GameObject tilePrefab, cornerPrefab, parentObj;
+    private int selectedSlot = -1;
 
     [MenuItem("Window/Custom Tools/LevelEditor")]
     public static void ShowWindow()
     {
-        var wnd = GetWindow<LevelEditor>();
-        wnd.titleContent = new GUIContent("LevelEditor");
+        GetWindow<LevelEditor>("LevelEditor");
     }
 
     private void OnEnable()
@@ -38,10 +37,15 @@ public class LevelEditor : EditorWindow
         SceneView.duringSceneGui += OnSceneGUI;
     }
 
-    private void CreateGUI()
+    private void OnDisable()
+    {
+        SceneView.duringSceneGui -= OnSceneGUI;
+    }
+
+    public void CreateGUI()
     {
         var root = rootVisualElement;
-        root.Add(m_VisualTreeAsset.Instantiate());
+        root.Add(uiAsset.Instantiate());
 
         widthSlider = root.Q<SliderInt>("WidthSlider");
         heightSlider = root.Q<SliderInt>("HeightSlider");
@@ -55,6 +59,7 @@ public class LevelEditor : EditorWindow
         tilePrefabField = root.Q<ObjectField>("TilePrefabField");
         parentObjField = root.Q<ObjectField>("ParentObjField");
         cornerPrefabField = root.Q<ObjectField>("SlotField1");
+        levelDataSOField = root.Q<ObjectField>("LevelData");
 
         for (int i = 0; i < 5; i++)
         {
@@ -68,72 +73,15 @@ public class LevelEditor : EditorWindow
             });
         }
 
-        drawButton = root.Q<Button>("DrawButton"); drawButton.clicked += DrawLvl;
-        clearButton = root.Q<Button>("ClearButton"); clearButton.clicked += ClearLvl;
-        saveButton = root.Q<Button>("SaveButton"); saveButton.clicked += SaveLvl;
-    }
-
-    private void DrawLvl()
-    {
-        tilePrefab = tilePrefabField.value as GameObject;
-        parentObj = parentObjField.value as GameObject;
-        cornerPrefab = cornerPrefabField.value as GameObject;
-
-        if (tilePrefab == null || parentObj == null)
-        {
-            Debug.LogWarning("Tile Prefab veya Parent Object eksik!");
-            return;
-        }
-        if (cornerPrefab == null)
-        {
-            Debug.LogWarning("Kenar prefab eksik!");
-            return;
-        }
-
-        ClearLvl();
-
-        int W = widthSlider.value;
-        int H = heightSlider.value;
-
-        for (int x = 0; x < W; x++)
-            for (int y = 0; y < H; y++)
-                InstantiateAt(tilePrefab, new Vector3(x, 0, y));
-
-        for (int x = 0; x < W; x++)
-        {
-            InstantiateAt(cornerPrefab, new Vector3(x, 0, 0));
-            InstantiateAt(cornerPrefab, new Vector3(x, 0, H - 1));
-        }
-        for (int y = 1; y < H - 1; y++)
-        {
-            InstantiateAt(cornerPrefab, new Vector3(0, 0, y));
-            InstantiateAt(cornerPrefab, new Vector3(W - 1, 0, y));
-        }
-    }
-
-    private void ClearLvl()
-    {
-        parentObj = parentObjField.value as GameObject;
-        if (parentObj == null) return;
-        for (int i = parentObj.transform.childCount - 1; i >= 0; i--)
-            DestroyImmediate(parentObj.transform.GetChild(i).gameObject);
-    }
-
-    private void SaveLvl()
-    {
-        var lvlData = CreateInstance<LvlData>();
-        lvlData.width = widthSlider.value;
-        lvlData.height = heightSlider.value;
-
-        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO_{lvlData.width}x{lvlData.height}.asset");
-        AssetDatabase.CreateAsset(lvlData, path);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+        drawButton = root.Q<Button>("DrawButton"); drawButton.clicked += DrawLevel;
+        clearButton = root.Q<Button>("ClearButton"); clearButton.clicked += ClearLevel;
+        saveButton = root.Q<Button>("SaveButton"); saveButton.clicked += SaveLevelData;
+        loadButton = root.Q<Button>("LoadButton"); loadButton.clicked += LoadLevelData;
     }
 
     private void OnSceneGUI(SceneView view)
     {
-       // if (focusedWindow != this) return;
+        //if (focusedWindow != this) return;
         var e = Event.current;
         if (e.type == EventType.MouseDown && e.button == 0)
         {
@@ -164,22 +112,152 @@ public class LevelEditor : EditorWindow
             HandleUtility.AddDefaultControl(GUIUtility.GetControlID(GetHashCode(), FocusType.Passive));
     }
 
-    private void InstantiateAt(GameObject prefab, Vector3 rawPos)
+    private void DrawLevel()
     {
-        if (prefab == null || parentObj == null) return;
+        if (!ValidateBasics()) return;
+        ClearLevel();
+        placedPrefabs.Clear();
+        placedPositions.Clear();
 
-        float x = Mathf.Round(rawPos.x);
-        float z = Mathf.Round(rawPos.z);
-        x += 0.5f;
-        z += 0.5f;
+        int W = widthSlider.value;
+        int H = heightSlider.value;
 
-        var go = Instantiate(prefab);
-        go.transform.position = new Vector3(x, 0f, z);
-        go.transform.SetParent(parentObj.transform, true);
+        DrawBaseGrid(W, H);
+        PlaceRandomObjects(W, H);
     }
 
-    private void OnDisable()
+    void DeleteObjectForPlay()
     {
-        SceneView.duringSceneGui -= OnSceneGUI;
+
+    }
+
+    private void ClearLevel()
+    {
+        parentObj = parentObjField.value as GameObject;
+        if (parentObj == null) return;
+        for (int i = parentObj.transform.childCount - 1; i >= 0; i--)
+            DestroyImmediate(parentObj.transform.GetChild(i).gameObject);
+    }
+
+    private void SaveLevelData()
+    {
+        if (placedPrefabs.Count == 0)
+        {
+            Debug.LogWarning("Önce bir level çizmelisiniz!");
+            return;
+        }
+
+        var data = CreateInstance<LvlData>();
+        data.width = widthSlider.value;
+        data.height = heightSlider.value;
+        data.tilePrefab = tilePrefabField.value as GameObject;
+        data.cornerPrefab = cornerPrefabField.value as GameObject;
+        data.objects = new List<GameObject>(placedPrefabs);
+        data.positions = new List<Vector2>(placedPositions);
+
+        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO_{data.width}x{data.height}.asset");
+        AssetDatabase.CreateAsset(data, path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    private void LoadLevelData()
+    {
+        var data = levelDataSOField.value as LvlData;
+        if (data == null)
+        {
+            Debug.LogWarning("Yüklenecek bir LevelData atanmamýþ!");
+            return;
+        }
+
+        parentObj = parentObjField.value as GameObject;
+        if (parentObj == null)
+        {
+            Debug.LogWarning("Parent objesi atayýn!");
+            return;
+        }
+
+        widthSlider.value = data.width;
+        heightSlider.value = data.height;
+        tilePrefab = data.tilePrefab;
+        cornerPrefab = data.cornerPrefab;
+
+        ClearLevel();
+        DrawBaseGrid(data.width, data.height);
+
+        for (int i = 0; i < data.objects.Count; i++)
+        {
+            InstantiateAt(data.objects[i], new Vector3(data.positions[i].x, 0, data.positions[i].y));
+        }
+    }
+
+    private bool ValidateBasics()
+    {
+        tilePrefab = tilePrefabField.value as GameObject;
+        cornerPrefab = cornerPrefabField.value as GameObject;
+        parentObj = parentObjField.value as GameObject;
+
+        if (tilePrefab == null || cornerPrefab == null || parentObj == null)
+        {
+            Debug.LogWarning("Tile, Corner veya Parent objeleri atayýn!");
+            return false;
+        }
+        return true;
+    }
+
+    private void DrawBaseGrid(int W, int H)
+    {
+        for (int x = 0; x < W; x++)
+            for (int y = 0; y < H; y++)
+                InstantiateAt(tilePrefab, new Vector3(x, 0, y));
+
+        for (int x = 0; x < W; x++)
+        {
+            InstantiateAt(cornerPrefab, new Vector3(x, 0, 0));
+            InstantiateAt(cornerPrefab, new Vector3(x, 0, H - 1));
+        }
+        for (int y = 1; y < H - 1; y++)
+        {
+            InstantiateAt(cornerPrefab, new Vector3(0, 0, y));
+            InstantiateAt(cornerPrefab, new Vector3(W - 1, 0, y));
+        }
+    }
+
+    private void PlaceRandomObjects(int W, int H)
+    {
+        int innerW = W - 2, innerH = H - 2;
+        int maxCount = Mathf.RoundToInt(innerW * innerH * 0.5f);
+        var positions = new List<Vector2Int>();
+        for (int x = 1; x < W - 1; x++)
+            for (int y = 1; y < H - 1; y++)
+                positions.Add(new Vector2Int(x, y));
+
+        var rnd = new System.Random();
+        for (int i = 0; i < maxCount && positions.Count > 0; i++)
+        {
+            int idx = rnd.Next(positions.Count);
+            var p = positions[idx];
+            positions.RemoveAt(idx);
+
+            var valids = new List<GameObject>();
+            for (int j = 1; j < slotFields.Length; j++)
+                if (slotFields[j].value is GameObject go) valids.Add(go);
+
+            if (valids.Count == 0) break;
+
+            var prefab = valids[rnd.Next(valids.Count)];
+            InstantiateAt(prefab, new Vector3(p.x, 0, p.y));
+            placedPrefabs.Add(prefab);
+            placedPositions.Add(new Vector2(p.x, p.y));
+        }
+    }
+
+    private void InstantiateAt(GameObject prefab, Vector3 rawPos)
+    {
+        float x = Mathf.Round(rawPos.x) + 0.5f;
+        float z = Mathf.Round(rawPos.z) + 0.5f;
+        var go = Instantiate(prefab);
+        go.transform.SetParent(parentObj.transform, worldPositionStays: true);
+        go.transform.position = new Vector3(x, 0, z);
     }
 }
