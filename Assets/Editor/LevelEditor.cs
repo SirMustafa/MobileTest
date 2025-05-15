@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 public class LevelEditor : EditorWindow
 {
-    [SerializeField] private VisualTreeAsset uiAsset = default;
+    private VisualTreeAsset uiAsset = default;
+    [SerializeField] private EditorSO editorSO;
 
     private List<GameObject> placedPrefabs = new();
     private List<Vector2> placedPositions = new();
