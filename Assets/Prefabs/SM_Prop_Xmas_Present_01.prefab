@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8280609366079251228}
   - component: {fileID: 4270243315827010759}
   - component: {fileID: 8035952212642710745}
+  - component: {fileID: -4635589316670415790}
   m_Layer: 0
   m_Name: SM_Prop_Xmas_Present_01
   m_TagString: Untagged
@@ -108,3 +109,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.25, z: 0.45}
   m_Center: {x: 0, y: 0.125, z: 0}
+--- !u!114 &-4635589316670415790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5181538944999362159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df908fd29177c454ea9532f3978e5f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

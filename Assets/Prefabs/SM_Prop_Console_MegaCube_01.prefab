@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8570979138931138567}
   - component: {fileID: 7120933578002681973}
   - component: {fileID: 429419747095598173}
+  - component: {fileID: -3591472253472030966}
   m_Layer: 0
   m_Name: SM_Prop_Console_MegaCube_01
   m_TagString: Untagged
@@ -109,3 +110,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43324819851145510, guid: c7c47d1158ec22e4fb402ac88ee5f6bd, type: 2}
+--- !u!114 &-3591472253472030966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711935568327381437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df908fd29177c454ea9532f3978e5f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

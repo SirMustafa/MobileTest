@@ -6,8 +6,7 @@ using System.Collections.Generic;
 
 public class LevelEditor : EditorWindow
 {
-    private VisualTreeAsset uiAsset = default;
-    [SerializeField] private EditorSO editorSO;
+    [SerializeField] private VisualTreeAsset uiAsset = default;
 
     private List<GameObject> placedPrefabs = new();
     private List<Vector2> placedPositions = new();
@@ -127,11 +126,6 @@ public class LevelEditor : EditorWindow
         PlaceRandomObjects(W, H);
     }
 
-    void DeleteObjectForPlay()
-    {
-
-    }
-
     private void ClearLevel()
     {
         parentObj = parentObjField.value as GameObject;
@@ -227,7 +221,7 @@ public class LevelEditor : EditorWindow
     private void PlaceRandomObjects(int W, int H)
     {
         int innerW = W - 2, innerH = H - 2;
-        int maxCount = Mathf.RoundToInt(innerW * innerH * 0.5f);
+        int maxCount = Mathf.RoundToInt(innerW * innerH * 0.6f);
         var positions = new List<Vector2Int>();
         for (int x = 1; x < W - 1; x++)
             for (int y = 1; y < H - 1; y++)
