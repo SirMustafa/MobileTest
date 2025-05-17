@@ -136,7 +136,7 @@ public class LvlEditorWindow : EditorWindow
 
     private void CreateLvlData(int x, int y)
     {
-        LvlData lvlData = CreateInstance<LvlData>();
+        LvlDataSO lvlData = CreateInstance<LvlDataSO>();
         lvlData.width = x;
         lvlData.height = y;
 

@@ -1,12 +1,10 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
     public static MainMenuManager Instance;
-
     [SerializeField] List<GameObject> Panels = new List<GameObject>();
     List<CanvasGroup> PanelGroups = new List<CanvasGroup>();
     int previousPanelIndex = 0;
@@ -41,5 +39,9 @@ public class MainMenuManager : MonoBehaviour
             PanelGroups[panelIndex].DOFade(1f, fadeDuration);
             previousPanelIndex = panelIndex;
         });
+    }
+    public void BackBtn()
+    {
+        //ChangePanel(
     }
 }

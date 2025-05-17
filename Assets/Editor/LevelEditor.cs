@@ -8,8 +8,7 @@ public class LevelEditor : EditorWindow
 {
     [SerializeField] private VisualTreeAsset uiAsset = default;
 
-    private List<GameObject> placedPrefabs = new();
-    private List<Vector2> placedPositions = new();
+    private List<Blocks> placedPrefabs = new();
 
     private SliderInt widthSlider;
     private SliderInt heightSlider;
@@ -22,6 +21,35 @@ public class LevelEditor : EditorWindow
     private Button drawButton, clearButton, saveButton, loadButton;
     private ObjectField[] slotFields = new ObjectField[5];
     private RadioButton[] slotRadios = new RadioButton[5];
+
+    private const float refWidth = 15f;
+    private const float refHeight = 17f;
+
+    private static readonly Vector2[] refPositions = new Vector2[]
+    {
+        new Vector2(4f, 5f),
+        new Vector2(10f, 5f),
+        new Vector2(10f, 11f),
+        new Vector2(4f, 11f)
+    };
+
+    public List<Vector2> GetResponsivePositions()
+    {
+        var result = new List<Vector2>(refPositions.Length);
+
+        foreach (var p in refPositions)
+        {
+            float nx = p.x / refWidth;
+            float ny = p.y / refHeight;
+
+            float scaledX = nx * widthSlider.value;
+            float scaledY = ny * heightSlider.value;
+
+            result.Add(new Vector2(scaledX, scaledY));
+        }
+
+        return result;
+    }
 
     private GameObject tilePrefab, cornerPrefab, parentObj;
     private int selectedSlot = -1;
@@ -117,7 +145,6 @@ public class LevelEditor : EditorWindow
         if (!ValidateBasics()) return;
         ClearLevel();
         placedPrefabs.Clear();
-        placedPositions.Clear();
 
         int W = widthSlider.value;
         int H = heightSlider.value;
@@ -142,15 +169,14 @@ public class LevelEditor : EditorWindow
             return;
         }
 
-        var data = CreateInstance<LvlData>();
+        var data = CreateInstance<LvlDataSO>();
         data.width = widthSlider.value;
         data.height = heightSlider.value;
         data.tilePrefab = tilePrefabField.value as GameObject;
         data.cornerPrefab = cornerPrefabField.value as GameObject;
-        data.objects = new List<GameObject>(placedPrefabs);
-        data.positions = new List<Vector2>(placedPositions);
+        data.placedBlocksData = new List<Blocks>(placedPrefabs);
 
-        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO_{data.width}x{data.height}.asset");
+        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO/SO_{data.width}x{data.height}.asset");
         AssetDatabase.CreateAsset(data, path);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -158,7 +184,7 @@ public class LevelEditor : EditorWindow
 
     private void LoadLevelData()
     {
-        var data = levelDataSOField.value as LvlData;
+        var data = levelDataSOField.value as LvlDataSO;
         if (data == null)
         {
             Debug.LogWarning("Yüklenecek bir LevelData atanmamýþ!");
@@ -180,9 +206,10 @@ public class LevelEditor : EditorWindow
         ClearLevel();
         DrawBaseGrid(data.width, data.height);
 
-        for (int i = 0; i < data.objects.Count; i++)
+        for (int i = 0; i < data.placedBlocksData.Count; i++)
         {
-            InstantiateAt(data.objects[i], new Vector3(data.positions[i].x, 0, data.positions[i].y));
+            var block = data.placedBlocksData[i];
+            InstantiateAt(block.slotObject, new Vector3(block.index.x, 0, block.index.y));
         }
     }
 
@@ -221,29 +248,48 @@ public class LevelEditor : EditorWindow
     private void PlaceRandomObjects(int W, int H)
     {
         int innerW = W - 2, innerH = H - 2;
-        int maxCount = Mathf.RoundToInt(innerW * innerH * 0.6f);
+        int maxCount = Mathf.RoundToInt(innerW * innerH * 0.7f);
+
+        HashSet<Vector2Int> reserved = new HashSet<Vector2Int>();
+        foreach (var v in GetResponsivePositions())
+        {
+            Vector2Int center = new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y));
+            reserved.Add(center);
+            reserved.Add(center + Vector2Int.up);
+            reserved.Add(center + Vector2Int.down);
+            reserved.Add(center + Vector2Int.left);
+            reserved.Add(center + Vector2Int.right);
+        }
+
         var positions = new List<Vector2Int>();
         for (int x = 1; x < W - 1; x++)
+        {
             for (int y = 1; y < H - 1; y++)
-                positions.Add(new Vector2Int(x, y));
+            {
+                var pos = new Vector2Int(x, y);
+                if (!reserved.Contains(pos))
+                    positions.Add(pos);
+            }
+        }  
 
         var rnd = new System.Random();
+
         for (int i = 0; i < maxCount && positions.Count > 0; i++)
         {
             int idx = rnd.Next(positions.Count);
             var p = positions[idx];
             positions.RemoveAt(idx);
-
             var valids = new List<GameObject>();
+
             for (int j = 1; j < slotFields.Length; j++)
+            {
                 if (slotFields[j].value is GameObject go) valids.Add(go);
-
+            }
+                
             if (valids.Count == 0) break;
-
             var prefab = valids[rnd.Next(valids.Count)];
             InstantiateAt(prefab, new Vector3(p.x, 0, p.y));
-            placedPrefabs.Add(prefab);
-            placedPositions.Add(new Vector2(p.x, p.y));
+            placedPrefabs.Add(new Blocks { slotObject = prefab, index = new Vector2(p.x, p.y) });
         }
     }
 

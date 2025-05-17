@@ -69,7 +69,7 @@ public class SetPlayers : MonoBehaviour
 
     public void SetPlayerCount(int howManyPlayer)
     {
-        PanelGroups[currentPanelIndex]
+        PanelGroups[0]
         .DOFade(0f, fadeDuration)
         .OnComplete(() =>
         {
@@ -110,5 +110,18 @@ public class SetPlayers : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+    }
+
+    private void OnDisable()
+    {
+        PanelGroups[1]
+        .DOFade(0f, fadeDuration)
+        .OnComplete(() =>
+        {
+            Panels[1].SetActive(false);
+            Panels[0].SetActive(true);
+            PanelGroups[0].alpha = 0f;
+            PanelGroups[0].DOFade(1f, fadeDuration);
+        });
     }
 }
