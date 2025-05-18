@@ -209,7 +209,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -19056,7 +19056,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -19073,8 +19073,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -57252,7 +57252,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -57269,8 +57269,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -62681,20 +62681,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3811b397666965c418dd11e087f03f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panels:
+  panels:
   - {fileID: 1592350915}
   - {fileID: 1405974274}
-  PanelGroups:
+  panelGroups:
   - {fileID: 1592350919}
   - {fileID: 1405974278}
-  PlayersPos:
+  playerIndicators:
+  - {fileID: 498894112}
+  - {fileID: 1148829375}
+  playerPositions:
   - {fileID: 753646047}
   - {fileID: 1561325215}
   - {fileID: 575252441}
   - {fileID: 1135709990}
-  player1Indicator: {fileID: 498894112}
-  player2Indicator: {fileID: 1148829375}
   fadeDuration: 0.5
+  gameData: {fileID: 11400000, guid: f672ff01a5ed0bd43a2d384bc3bb835e, type: 2}
+  inputThreshold: 0.5
 --- !u!114 &1991740891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62740,7 +62743,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1991740890}
         m_TargetAssemblyTypeName: SetPlayers, Assembly-CSharp
-        m_MethodName: OnMove
+        m_MethodName: OnMoveP1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62756,7 +62759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1991740890}
         m_TargetAssemblyTypeName: SetPlayers, Assembly-CSharp
-        m_MethodName: OnApply
+        m_MethodName: OnApplyP1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62772,7 +62775,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1991740890}
         m_TargetAssemblyTypeName: SetPlayers, Assembly-CSharp
-        m_MethodName: OnMove1
+        m_MethodName: OnMoveP2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62788,7 +62791,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1991740890}
         m_TargetAssemblyTypeName: SetPlayers, Assembly-CSharp
-        m_MethodName: OnApply1
+        m_MethodName: OnApplyP2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

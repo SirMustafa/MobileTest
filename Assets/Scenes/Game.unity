@@ -168,6 +168,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3912eec2d0ca4c41872456adc6b38e6, type: 2}
   - {fileID: 11400000, guid: 710deef968f25ad4ca4bcb9eb1a156ca, type: 2}
   - {fileID: 11400000, guid: 2362c3b461a130346ad3ab3465bb7788, type: 2}
+  PlayerList:
+  - {fileID: 1965410809269166, guid: bc89cff11dc72544faaaa69b501fd596, type: 3}
+  - {fileID: 1645872946987862, guid: 9b88eb630e9e15a4f950eae741685374, type: 3}
+  - {fileID: 1283017171755564, guid: f10c394033f254647873f3d28a75a062, type: 3}
+  - {fileID: 1849736199912346, guid: e332982425ee2ec48b168979bb7b43f5, type: 3}
 --- !u!1 &78735819
 GameObject:
   m_ObjectHideFlags: 0
