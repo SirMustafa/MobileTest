@@ -108,6 +108,7 @@ public class SetPlayers : MonoBehaviour
     {
         if (isPlayer1Locked && isPlayer2Locked)
         {
+
             SceneManager.LoadScene(1);
         }
     }
