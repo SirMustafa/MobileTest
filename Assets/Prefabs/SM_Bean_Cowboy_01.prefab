@@ -179,9 +179,25 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0680fb2b-d559-43d1-957f-eaa65cea54bc
     m_ActionName: 'Player1/Interact[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b1ac889d-e693-4f50-b662-3b36297164fa
+    m_ActionName: 'PlayerChoose/Movement[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0fb57757-345e-40dd-9484-b83c5d593857
+    m_ActionName: 'PlayerChoose/Interact[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6b772ff-8ce0-4c98-993b-8a20769a095c
+    m_ActionName: 'PlayerChoose/Movement1[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6a9b89b-d0be-46ec-9b54-da0db49669b0
+    m_ActionName: 'PlayerChoose/Interact1[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &-465062234344423397

@@ -1,68 +1,108 @@
+using DG.Tweening;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] bool isTesting;
-    [SerializeField] GameDataSO gameData;
-    [SerializeField] List<LvlDataSO> levelDataList = new List<LvlDataSO>();
-    [SerializeField] List<GameObject> PlayerList = new List<GameObject>();
-    LvlDataSO currentLvl;
-    private const float refWidth = 15f;
-    private const float refHeight = 17f;
-    float widthSlider;
-    float heightSlider;
+    [Header("Settings")]
+    [SerializeField] private bool isTesting;
+    [SerializeField] private GameDataSO gameData;
+    [SerializeField] private List<LvlDataSO> levelDataList = new List<LvlDataSO>();
+    [SerializeField] private List<GameObject> playerPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> aiPrefabs = new List<GameObject>();
 
-    private static readonly Vector2[] refPositions = new Vector2[]
+    private LvlDataSO currentLevel;
+    private float widthScale;
+    private float heightScale;
+
+    private const float referenceWidth = 15f;
+    private const float referenceHeight = 17f;
+
+    private static readonly Vector2[] referencePositions = new Vector2[]
     {
-        new Vector2(4f, 5f),
-        new Vector2(10f, 5f),
-        new Vector2(10f, 11f),
-        new Vector2(4f, 11f)
+        new Vector2(5f, 4f),
+        new Vector2(11f, 4f),
+        new Vector2(11f, 10f),
+        new Vector2(5f, 10f)
     };
 
-    void Start()
+    private void Start()
     {
         Application.targetFrameRate = 60;
-        widthSlider = currentLvl.width;
-        heightSlider = currentLvl.height;
+
         if (isTesting) return;
+
+        currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
+        widthScale = currentLevel.width;
+        heightScale = currentLevel.height;
+
+        DrawBaseGrid(currentLevel.width, currentLevel.height);
         LoadLevelData();
+
         LoadPlayers();
-    }
-
-    public List<Vector2> GetResponsivePositions()
-    {
-        var result = new List<Vector2>(refPositions.Length);
-
-        foreach (var p in refPositions)
-        {
-            float nx = p.x / refWidth;
-            float ny = p.y / refHeight;
-
-            float scaledX = nx * widthSlider;
-            float scaledY = ny * heightSlider;
-
-            result.Add(new Vector2(scaledX, scaledY));
-        }
-
-        return result;
     }
 
     private void LoadLevelData()
     {
-        currentLvl = levelDataList[Random.Range(0, levelDataList.Count)];
-
-        foreach (var block in currentLvl.placedBlocksData)
+        foreach (var block in currentLevel.placedBlocksData)
         {
             Vector3 position = new Vector3(block.index.x, 0f, block.index.y);
-            Instantiate(block.slotObject, position, Quaternion.identity);
+            Instantiate(block.slotObject, position, Quaternion.identity, this.transform);
         }
     }
 
     private void LoadPlayers()
     {
-        
+        List<Vector2> spawnPositions = new List<Vector2>(referencePositions);
+
+        int index1 = gameData.playerInex1;
+        int index2 = gameData.playerInex2;
+
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 spawnPos = new Vector3(spawnPositions[i].x, 0f, spawnPositions[i].y);
+
+            if (i == index1)
+            {
+                GameObject playerGO = Instantiate(playerPrefabs[index1], spawnPos, Quaternion.identity);
+                playerGO.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player1");
+            }
+            else if (i == index2 && index2 != -1)
+            {
+                GameObject playerGO = Instantiate(playerPrefabs[index2], spawnPos, Quaternion.identity);
+                playerGO.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            }
+            else
+            {
+                Instantiate(aiPrefabs[i], spawnPos, Quaternion.identity);
+            }
+        }
+    }
+
+    private void DrawBaseGrid(int width, int height)
+    {
+        GameObject tilePrefab = currentLevel.tilePrefab;
+        GameObject cornerPrefab = currentLevel.cornerPrefab;
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Instantiate(tilePrefab, new Vector3(x, 0f, y), Quaternion.identity, this.transform);
+            }
+        }
+
+        for (int x = 0; x < width; x++)
+        {
+            Instantiate(cornerPrefab, new Vector3(x, 0f, 0), Quaternion.identity, this.transform);
+            Instantiate(cornerPrefab, new Vector3(x, 0f, height - 1), Quaternion.identity, this.transform);
+        }
+
+        for (int y = 1; y < height - 1; y++)
+        {
+            Instantiate(cornerPrefab, new Vector3(0, 0f, y), Quaternion.identity, this.transform);
+            Instantiate(cornerPrefab, new Vector3(width - 1, 0f, y), Quaternion.identity, this.transform);
+        }
     }
 }

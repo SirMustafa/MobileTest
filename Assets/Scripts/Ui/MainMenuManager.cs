@@ -40,8 +40,4 @@ public class MainMenuManager : MonoBehaviour
             previousPanelIndex = panelIndex;
         });
     }
-    public void BackBtn()
-    {
-        //ChangePanel(
-    }
 }

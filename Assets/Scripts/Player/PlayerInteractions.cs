@@ -11,8 +11,8 @@ public class PlayerInteractions : MonoBehaviour
         {
             Vector3 spawnPos = transform.position;
 
-            spawnPos.x = Mathf.Round(spawnPos.x - 0.5f) + 0.5f;
-            spawnPos.z = Mathf.Round(spawnPos.z - 0.5f) + 0.5f;
+            spawnPos.x = Mathf.Round(spawnPos.x) ;
+            spawnPos.z = Mathf.Round(spawnPos.z) ;
 
             Instantiate(TheBomb, spawnPos, Quaternion.identity);
         }

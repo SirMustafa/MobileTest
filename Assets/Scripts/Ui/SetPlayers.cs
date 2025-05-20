@@ -71,6 +71,7 @@ public class SetPlayers : MonoBehaviour
         else gameData.playerInex2 = playerIndices[1];
 
         isPlayerLocked[playerNum] = true;
+
         if (isPlayerLocked[0] && isPlayerLocked[1])
         {
             SceneManager.LoadScene(1);
@@ -84,6 +85,7 @@ public class SetPlayers : MonoBehaviour
             playerIndicators[1].gameObject.SetActive(false);
             playerIndices[1] = -1;
             isPlayerLocked[1] = true;
+            gameData.playerInex2 = -1;
         }
         SwapPanels(0, 1);
     }
