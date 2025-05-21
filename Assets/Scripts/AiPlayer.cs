@@ -1,16 +1,14 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AiPlayer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    NavMeshAgent agent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //private void OnEnable()
+    //{
+    //    agent = GetComponent<NavMeshAgent>();
+    //
+    //    agent.SetDestination(new Vector3(8.5f, 0, 7.5f));
+    //}
 }

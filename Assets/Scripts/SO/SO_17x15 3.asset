@@ -1,0 +1,427 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e88df3befb500469b3ab739b192073, type: 3}
+  m_Name: SO_17x15 3
+  m_EditorClassIdentifier: 
+  width: 17
+  height: 15
+  tilePrefab: {fileID: 2955162982229274806, guid: 5d5baaf975aea5041b9ff447c18080a6, type: 3}
+  cornerPrefab: {fileID: 4189127119872611454, guid: 23ac10341888c244bafd57574fd0c22c, type: 3}
+  placedBlocksData:
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 5, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 3, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 2, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 1, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 12, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 4, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 13, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 8, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 12, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 7, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 13, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 4, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 6, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 3, y: 10}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 15, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 1, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 8, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 4, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 1, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 4, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 13, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 12, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 14, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 15, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 3, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 14, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 5, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 15, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 7, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 6, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 5, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 9, y: 10}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 9, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 11, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 10, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 6, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 14, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 14, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 6, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 5, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 8, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 6, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 3, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 12, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 4, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 2, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 10, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 11, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 1, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 1, y: 10}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 4, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 11, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 7, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 14, y: 10}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 1, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 13, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 12, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 2, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 2, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 8, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 8, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 7, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 12, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 3, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 11, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 2, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 9, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 2, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 3, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 14, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 7, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 9, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 4, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 6, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 8, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 4, y: 9}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 10, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 4, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 15, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 9, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 14, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 4, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 12, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 3, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 14, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 3, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 8, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 15, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 10, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 7, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 1, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 13, y: 10}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 6, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 10, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 7, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 3, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 9, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 3, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 11, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 12, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 4, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 13, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 2, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 7, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 13, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 9, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 13, y: 4}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 15, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 13, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 6, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 15, y: 5}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 11, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 13, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 9, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 3, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 15, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 2, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 2, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 13, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 5, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 1, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 1, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 7, y: 11}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 7, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 14, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 15, y: 2}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 10, y: 12}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 10, y: 13}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 8, y: 10}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 12, y: 1}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 9, y: 7}
+    isBreakable: 0
+  - slotObject: {fileID: 2593074963849597678, guid: c58814a99c6bb0d49a46d95be4e8ac29, type: 3}
+    index: {x: 1, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 71287170506828028, guid: 8b79b36e972b9d7418db666140ab5cc8, type: 3}
+    index: {x: 12, y: 3}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 14, y: 8}
+    isBreakable: 0
+  - slotObject: {fileID: 4615924982917665879, guid: c14760d28bd27654786895595882f9e5, type: 3}
+    index: {x: 2, y: 6}
+    isBreakable: 0
+  - slotObject: {fileID: 6038023162369460968, guid: 9f63ef83ab753de47afa6cb032ea13ad, type: 3}
+    index: {x: 9, y: 1}
+    isBreakable: 0

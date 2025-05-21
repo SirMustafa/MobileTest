@@ -48481,7 +48481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596143103}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlateParent(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58523,7 +58523,7 @@ GameObject:
   - component: {fileID: 1899216264}
   - component: {fileID: 1899216263}
   - component: {fileID: 1899216262}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plate
   m_TagString: TilePrefab
   m_Icon: {fileID: 0}

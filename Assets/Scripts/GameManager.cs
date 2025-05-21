@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,11 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> aiPrefabs = new List<GameObject>();
 
     private LvlDataSO currentLevel;
-    private float widthScale;
-    private float heightScale;
 
-    private const float referenceWidth = 15f;
-    private const float referenceHeight = 17f;
 
     private static readonly Vector2[] referencePositions = new Vector2[]
     {
@@ -34,12 +31,9 @@ public class GameManager : MonoBehaviour
         if (isTesting) return;
 
         currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
-        widthScale = currentLevel.width;
-        heightScale = currentLevel.height;
 
         DrawBaseGrid(currentLevel.width, currentLevel.height);
         LoadLevelData();
-
         LoadPlayers();
     }
 
@@ -68,7 +62,7 @@ public class GameManager : MonoBehaviour
                 GameObject playerGO = Instantiate(playerPrefabs[index1], spawnPos, Quaternion.identity);
                 playerGO.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player1");
             }
-            else if (i == index2 && index2 != -1)
+            else if (i == index2)
             {
                 GameObject playerGO = Instantiate(playerPrefabs[index2], spawnPos, Quaternion.identity);
                 playerGO.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
@@ -85,13 +79,10 @@ public class GameManager : MonoBehaviour
         GameObject tilePrefab = currentLevel.tilePrefab;
         GameObject cornerPrefab = currentLevel.cornerPrefab;
 
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                Instantiate(tilePrefab, new Vector3(x, 0f, y), Quaternion.identity, this.transform);
-            }
-        }
+        GameObject obj = Instantiate(tilePrefab, new Vector3(0, 0f, 0), Quaternion.identity, this.transform);
+        obj.transform.localScale = new Vector3(currentLevel.width, 1, currentLevel.height);
+        obj.transform.position = new Vector3(currentLevel.width/2, 0, currentLevel.height/2);
+        //obj.GetComponent<NavMeshSurface>().BuildNavMesh();
 
         for (int x = 0; x < width; x++)
         {

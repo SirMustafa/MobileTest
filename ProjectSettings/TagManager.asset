@@ -17,8 +17,8 @@ TagManager:
   - Blow
   - Blocks
   - UiCameraObjects
-  - 
-  - 
+  - Walkable
+  - NotWalkable
   - 
   - 
   - 

@@ -169,17 +169,20 @@ public class LevelEditor : EditorWindow
             return;
         }
 
-        var data = CreateInstance<LvlDataSO>();
-        data.width = widthSlider.value;
-        data.height = heightSlider.value;
-        data.tilePrefab = tilePrefabField.value as GameObject;
-        data.cornerPrefab = cornerPrefabField.value as GameObject;
-        data.placedBlocksData = new List<Blocks>(placedPrefabs);
+        //var data = CreateInstance<LvlDataSO>();
+        //data.width = widthSlider.value;
+        //data.height = heightSlider.value;
+        //data.tilePrefab = tilePrefabField.value as GameObject;
+        //data.cornerPrefab = cornerPrefabField.value as GameObject;
+        //data.placedBlocksData = new List<Blocks>(placedPrefabs);
 
-        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO/SO_{data.width}x{data.height}.asset");
-        AssetDatabase.CreateAsset(data, path);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+
+        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO/SO_{widthSlider.value}x{heightSlider.value}.prefab");
+        PrefabUtility.SaveAsPrefabAsset(parentObj, path);
+
+        //AssetDatabase.CreateAsset(data, path);
+        //AssetDatabase.SaveAssets();
+        //AssetDatabase.Refresh();
     }
 
     private void LoadLevelData()
@@ -229,9 +232,11 @@ public class LevelEditor : EditorWindow
 
     private void DrawBaseGrid(int W, int H)
     {
-        for (int x = 0; x < W; x++)
-            for (int y = 0; y < H; y++)
-                InstantiateAt(tilePrefab, new Vector3(x, 0, y));
+        float halfX = W / 2f;
+        float halfY = H / 2f;
+
+        GameObject tile = Instantiate(tilePrefab, new Vector3(halfX, 0, halfY), Quaternion.identity, parentObj.transform);
+        tile.transform.localScale = new Vector3(W, 1, H);
 
         for (int x = 0; x < W; x++)
         {
@@ -270,7 +275,7 @@ public class LevelEditor : EditorWindow
                 if (!reserved.Contains(pos))
                     positions.Add(pos);
             }
-        }  
+        }
 
         var rnd = new System.Random();
 
@@ -285,7 +290,7 @@ public class LevelEditor : EditorWindow
             {
                 if (slotFields[j].value is GameObject go) valids.Add(go);
             }
-                
+
             if (valids.Count == 0) break;
             var prefab = valids[rnd.Next(valids.Count)];
             InstantiateAt(prefab, new Vector3(p.x, 0, p.y));
