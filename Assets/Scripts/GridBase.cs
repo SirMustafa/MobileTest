@@ -1,32 +1,34 @@
-using UnityEngine;
-
 public class GridBase 
 {
-    private int width;
-    private int height;
-    private int[,] gridArray;
+    public int width;
+    public int height;
+    private Node[,] nodes;
 
     public GridBase(int width, int height)
     {
         this.width = width;
         this.height = height;
-        gridArray = new int[width, height];
+        nodes = new Node[width, height];
 
         for (int x = 0; x < width; x++)
+        {
             for (int y = 0; y < height; y++)
-                gridArray[x, y] = 0;
+            {
+                nodes[x, y] = new Node(x, y, true);
+            }
+        }
     }
 
     public void SetObstacle(int x, int y)
     {
-        gridArray[x, y] = 1;
+        if (x >= 0 && x < width && y >= 0 && y < height)
+            nodes[x, y].isWalkable = false;
     }
 
-    public bool IsWalkable(int x, int y)
+    public Node GetNode(int x, int y)
     {
-        if (x < 0 || x >= width || y < 0 || y >= height)
-            return false;
-
-        return gridArray[x, y] == 0;
+        if (x >= 0 && x < width && y >= 0 && y < height)
+            return nodes[x, y];
+        return null;
     }
 }

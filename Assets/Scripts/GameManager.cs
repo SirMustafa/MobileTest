@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<LvlDataSO> levelDataList = new List<LvlDataSO>();
     [SerializeField] private List<GameObject> playerPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> aiPrefabs = new List<GameObject>();
-
+    [SerializeField] private AiPlayer eleman;
     private LvlDataSO currentLevel;
 
 
@@ -30,11 +31,20 @@ public class GameManager : MonoBehaviour
 
         if (isTesting) return;
 
-        currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
+        AStarPathFinder.Instance.CreateGrid(15, 13);
+        AStarPathFinder.Instance.CalculatePath(new Vector2Int(0,0),new Vector2Int(12,0));
+        // StartCoroutine(TestAI());
 
-        DrawBaseGrid(currentLevel.width, currentLevel.height);
-        LoadLevelData();
-        LoadPlayers();
+        //currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
+        //DrawBaseGrid(currentLevel.width, currentLevel.height);
+        //LoadLevelData();
+        //LoadPlayers();
+    }
+
+    private IEnumerator TestAI()
+    {
+        yield return null;
+        eleman.MoveTo(10, 10);
     }
 
     private void LoadLevelData()
