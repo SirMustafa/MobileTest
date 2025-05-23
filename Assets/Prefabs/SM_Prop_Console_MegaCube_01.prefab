@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7120933578002681973}
   - component: {fileID: 429419747095598173}
   - component: {fileID: -3591472253472030966}
-  - component: {fileID: -4589949509172243051}
   m_Layer: 12
   m_Name: SM_Prop_Console_MegaCube_01
   m_TagString: Untagged
@@ -123,19 +122,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df908fd29177c454ea9532f3978e5f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!208 &-4589949509172243051
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711935568327381437}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.1, y: 0.1, z: 0.1}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.1, z: 0}
-  m_TimeToStationary: 0.5

@@ -1,4 +1,4 @@
-public class GridBase 
+public class GridBase
 {
     public int width;
     public int height;
@@ -23,6 +23,10 @@ public class GridBase
     {
         if (x >= 0 && x < width && y >= 0 && y < height)
             nodes[x, y].isWalkable = false;
+    }
+    public void RemoveObstacle(int x, int y)
+    {
+        nodes[x, y].isWalkable = true;
     }
 
     public Node GetNode(int x, int y)

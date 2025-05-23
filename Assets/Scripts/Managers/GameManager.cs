@@ -1,21 +1,19 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Intance;
     [Header("Settings")]
     [SerializeField] private bool isTesting;
     [SerializeField] private GameDataSO gameData;
     [SerializeField] private List<LvlDataSO> levelDataList = new List<LvlDataSO>();
     [SerializeField] private List<GameObject> playerPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> aiPrefabs = new List<GameObject>();
-    [SerializeField] private AiPlayer eleman;
     private LvlDataSO currentLevel;
-
 
     private static readonly Vector2[] referencePositions = new Vector2[]
     {
@@ -25,26 +23,28 @@ public class GameManager : MonoBehaviour
         new Vector2(5f, 10f)
     };
 
+    private void Awake()
+    {
+        Intance = this;
+    }
+
     private void Start()
     {
         Application.targetFrameRate = 60;
 
         if (isTesting) return;
 
-        AStarPathFinder.Instance.CreateGrid(15, 13);
-        AStarPathFinder.Instance.CalculatePath(new Vector2Int(0,0),new Vector2Int(12,0));
-        // StartCoroutine(TestAI());
+        currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
+        AStarPathFinder.Instance.CreateGrid(currentLevel.width, currentLevel.height);
 
-        //currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
-        //DrawBaseGrid(currentLevel.width, currentLevel.height);
-        //LoadLevelData();
-        //LoadPlayers();
+        DrawBaseGrid(currentLevel.width, currentLevel.height);
+        LoadLevelData();
+        LoadPlayers();
     }
 
-    private IEnumerator TestAI()
+    public Vector2Int WorldPos()
     {
-        yield return null;
-        eleman.MoveTo(10, 10);
+        return new Vector2Int(currentLevel.width, currentLevel.height);
     }
 
     private void LoadLevelData()
@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         {
             Vector3 position = new Vector3(block.index.x, 0f, block.index.y);
             Instantiate(block.slotObject, position, Quaternion.identity, this.transform);
+            AStarPathFinder.Instance.AddObstacle((int)block.index.x, (int)block.index.y);
         }
     }
 
@@ -91,8 +92,7 @@ public class GameManager : MonoBehaviour
 
         GameObject obj = Instantiate(tilePrefab, new Vector3(0, 0f, 0), Quaternion.identity, this.transform);
         obj.transform.localScale = new Vector3(currentLevel.width, 1, currentLevel.height);
-        obj.transform.position = new Vector3(currentLevel.width/2, 0, currentLevel.height/2);
-        //obj.GetComponent<NavMeshSurface>().BuildNavMesh();
+        obj.transform.position = new Vector3(currentLevel.width / 2, 0, currentLevel.height / 2);
 
         for (int x = 0; x < width; x++)
         {

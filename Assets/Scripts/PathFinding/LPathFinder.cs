@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStarPathFinder : MonoBehaviour
+public class LPathFinder : MonoBehaviour
 {
-    public static AStarPathFinder Instance;
+    public static LPathFinder Instance;
+    [SerializeField] bool iwantoSee;
 
     GridBase currentGrid;
     Vector2Int[] directions = new Vector2Int[]
@@ -22,14 +23,59 @@ public class AStarPathFinder : MonoBehaviour
     HashSet<Node> closedSet = new HashSet<Node>();
     private List<Vector2Int> path;
 
+    private Vector2Int lastTarget;
+    private bool hasLast = false;
+
     private void Awake()
     {
         Instance = this;
+    }
+    private void Update()
+    {
+        var maybePos = GetMouseGridPosition();
+        if (!maybePos.HasValue) return;
+
+        Vector2Int target = maybePos.Value;
+
+        if (!hasLast || target != lastTarget)
+        {
+            lastTarget = target;
+            hasLast = true;
+
+            CalculatePath(new Vector2Int(0, 0), target);
+        }
+    }
+    private Vector2Int? GetMouseGridPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (new Plane(Vector3.up, Vector3.zero).Raycast(ray, out float enter))
+        {
+            Vector3 worldPoint = ray.GetPoint(enter);
+            int gx = Mathf.FloorToInt(worldPoint.x);
+            int gy = Mathf.FloorToInt(worldPoint.z);
+            if (gx >= 0 && gx < currentGrid.width && gy >= 0 && gy < currentGrid.height)
+                return new Vector2Int(gx, gy);
+        }
+        return null;
     }
 
     public void CreateGrid(int width, int height)
     {
         currentGrid = new GridBase(width, height);
+        AddObstacle(7, 0);
+        AddObstacle(7, 1);
+        AddObstacle(7, 2);
+        AddObstacle(7, 3);
+        AddObstacle(7, 4);
+        AddObstacle(7, 5);
+
+        AddObstacle(13, 14);
+        AddObstacle(13, 13);
+        AddObstacle(13, 12);
+        AddObstacle(13, 11);
+        AddObstacle(13, 10);
+        AddObstacle(13, 9);
+        AddObstacle(13, 8);
     }
 
     public void AddObstacle(int x, int y)
@@ -64,31 +110,35 @@ public class AStarPathFinder : MonoBehaviour
 
             if (lowestFcostNode.getPos() == endPos)
             {
-                Debug.Log("istenilen yere ulaþýldý");
                 path = BuildPath(lowestFcostNode);
                 return;
             }
 
             Vector2Int currentPos = new Vector2Int(lowestFcostNode.x, lowestFcostNode.y);
 
-            foreach (Vector2Int dir in directions)
+            for (int i = 0; i < directions.Length; i++)
             {
+                Vector2Int dir = directions[i];
                 Vector2Int newPos = currentPos + dir;
+
                 if (currentGrid.GetNode(newPos.x, newPos.y) != null &&
                     currentGrid.GetNode(newPos.x, newPos.y).isWalkable &&
                     !closedSet.Contains(currentGrid.GetNode(newPos.x, newPos.y)))
                 {
                     Node nodeToAddList = currentGrid.GetNode(newPos.x, newPos.y);
+
+                    int movementCost = IsDiagonalMove(dir) ? 14 : 10;
+                    int newGCost = lowestFcostNode.gCost + movementCost;
+
                     if (!openSet.Contains(nodeToAddList))
                     {
                         openSet.Add(nodeToAddList);
-                        nodeToAddList.gCost = lowestFcostNode.gCost + 1;
+                        nodeToAddList.gCost = newGCost;
                         nodeToAddList.hCost = CalculateManhattanDistance(endPos, nodeToAddList.getPos());
                         nodeToAddList.parent = lowestFcostNode;
                     }
                     else
                     {
-                        int newGCost = lowestFcostNode.gCost + 1;
                         if (newGCost < nodeToAddList.gCost)
                         {
                             nodeToAddList.gCost = newGCost;
@@ -96,16 +146,26 @@ public class AStarPathFinder : MonoBehaviour
                         }
                     }
                 }
-            }
 
-            closedSet.Add(lowestFcostNode);
-            openSet.Remove(lowestFcostNode);
+                closedSet.Add(lowestFcostNode);
+                openSet.Remove(lowestFcostNode);
+            }
         }
+    }
+
+    private bool IsDiagonalMove(Vector2Int direction)
+    {
+        return direction.x != 0 && direction.y != 0;
     }
 
     private int CalculateManhattanDistance(Vector2Int nodesPos, Vector2Int desiredPos)
     {
-        return Mathf.Abs(nodesPos.x - desiredPos.x) + Mathf.Abs(nodesPos.y - desiredPos.y);
+        int dx = Mathf.Abs(nodesPos.x - desiredPos.x);
+        int dy = Mathf.Abs(nodesPos.y - desiredPos.y);
+
+        return 10 * (dx + dy) + (14 - 2 * 10) * Mathf.Min(dx, dy);
+
+        //return Mathf.Abs(nodesPos.x - desiredPos.x) + Mathf.Abs(nodesPos.y - desiredPos.y);
     }
 
     private List<Vector2Int> BuildPath(Node endNode)
@@ -124,7 +184,7 @@ public class AStarPathFinder : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (currentGrid == null) return;
+        if (currentGrid == null && !iwantoSee) return;
 
         float size = 1f;
         Vector3 offset = Vector3.zero;
