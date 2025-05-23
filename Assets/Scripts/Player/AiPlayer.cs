@@ -6,58 +6,58 @@ using UnityEngine;
 public class AiPlayer : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float sleepTime;
+    [SerializeField] private float sleepTime = 1f;
 
     private List<Vector2Int> currentPath;
     private int currentWaypoint = 0;
-    private bool isMoving = false;
-    public Vector2Int worldBorders { get; private set; }
+    Vector2Int worldBorders;
 
     private void Start()
     {
         worldBorders = GameManager.Intance.WorldPos();
-        StartCoroutine(WaitAndMove());
-    }
-
-    IEnumerator WaitAndMove()
-    {
-        yield return new WaitForSeconds(sleepTime);
         MoveTo();
     }
 
-    public void MoveTo()
+    void MoveTo()
     {
-        if (isMoving) return;
+        Vector2Int randomTarget = new Vector2Int(Random.Range(0, worldBorders.x), Random.Range(0, worldBorders.y));
+        currentPath = AStarPathFinder.Instance.CalculatePath(new Vector2Int((int)transform.position.x, (int)transform.position.z), randomTarget);
 
-        Vector2Int target = new Vector2Int(Random.Range(0, worldBorders.x), Random.Range(0, worldBorders.y));
-        Vector2Int currentPos = new Vector2Int((int)transform.position.x, (int)transform.position.z);
-
-        currentPath = AStarPathFinder.Instance.CalculatePath(currentPos, target);
-
-        if (currentPath == null || currentPath.Count <= 1)
+        if (currentPath != null && currentPath.Count > 0)
         {
-            isMoving = false;
-            return;
+            currentWaypoint = 0;
+            StartCoroutine(FollowPath());
         }
-
-        currentWaypoint = 1;
-        isMoving = true;
-        MoveStep();
+        else
+        {
+            Invoke(nameof(MoveTo), 1f);
+        }
     }
 
-    private void MoveStep()
+    private IEnumerator FollowPath()
     {
-        if (currentWaypoint >= currentPath.Count)
+        yield return new WaitForSeconds(sleepTime);
+
+        while (currentWaypoint < currentPath.Count)
         {
-            isMoving = false;
-            StartCoroutine(WaitAndMove());
-            return;
+            Vector3 targetPos = new Vector3(currentPath[currentWaypoint].x, transform.position.y, currentPath[currentWaypoint].y);
+
+            Vector3 direction = (targetPos - transform.position).normalized;
+            if (direction != Vector3.zero)
+            {
+                float yRotation = Quaternion.LookRotation(direction).eulerAngles.y;
+                transform.DORotate(new Vector3(0, yRotation, 0), 0.3f);
+            }
+
+            float distance = Vector3.Distance(transform.position, targetPos);
+            float duration = distance / moveSpeed;
+
+            Tween moveTween = transform.DOMove(targetPos, duration).SetEase(Ease.Linear);
+            yield return moveTween.WaitForCompletion();
+
+            currentWaypoint++;
         }
 
-        Vector2Int nextGridPos = currentPath[currentWaypoint];
-        Vector3 nextWorldPos = new Vector3(nextGridPos.x, 0f, nextGridPos.y);
-
-        transform.DOMove(nextWorldPos, 1f / moveSpeed).SetEase(Ease.Linear)
-            .OnComplete(() => { worldBorders = nextGridPos; currentWaypoint++; MoveStep(); });
+        MoveTo();
     }
 }

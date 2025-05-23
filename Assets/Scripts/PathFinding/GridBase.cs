@@ -10,9 +10,9 @@ public class GridBase
         this.height = height;
         nodes = new Node[width, height];
 
-        for (int x = 0; x < width; x++)
+        for (int x = 1; x < width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 1; y < height; y++)
             {
                 nodes[x, y] = new Node(x, y, true);
             }

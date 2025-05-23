@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         if (isTesting) return;
 
         currentLevel = levelDataList[Random.Range(0, levelDataList.Count)];
-        AStarPathFinder.Instance.CreateGrid(currentLevel.width, currentLevel.height);
+        AStarPathFinder.Instance.CreateGrid(currentLevel.width - 1, currentLevel.height - 1);
 
         DrawBaseGrid(currentLevel.width, currentLevel.height);
         LoadLevelData();

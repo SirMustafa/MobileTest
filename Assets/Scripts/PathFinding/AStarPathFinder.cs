@@ -43,6 +43,7 @@ public class AStarPathFinder : MonoBehaviour
         closedSet.Clear();
 
         Node start = currentGrid.GetNode(startPos.x, startPos.y);
+
         start.gCost = 0;
         start.hCost = CalculateManhattanDistance(startPos, endPos);
         start.parent = null;
@@ -141,12 +142,10 @@ public class AStarPathFinder : MonoBehaviour
     {
         if (!iWannaSee || currentGrid == null) return;
 
-        Gizmos.color = Color.cyan;
-
         int width = currentGrid.width;
         int height = currentGrid.height;
 
-        Vector3 offset = new Vector3(0.5f, 0, 0.5f); // Hücre merkezine ulaþmak için
+        Vector3 cellSize = new Vector3(1, 0, 1);
 
         for (int x = 0; x < width; x++)
         {
@@ -155,8 +154,9 @@ public class AStarPathFinder : MonoBehaviour
                 Node node = currentGrid.GetNode(x, y);
                 if (node == null) continue;
 
-                Vector3 center = new Vector3(x, 0, y) + offset;
-                Gizmos.DrawLine(center, center + Vector3.up * 1f); // 1 birim uzunluðunda dik çizgi
+                Vector3 center = new Vector3(x, 0, y);
+                Gizmos.color = node.isWalkable ? Color.cyan : Color.red;
+                Gizmos.DrawWireCube(center, cellSize);
             }
         }
     }

@@ -169,20 +169,19 @@ public class LevelEditor : EditorWindow
             return;
         }
 
-        //var data = CreateInstance<LvlDataSO>();
-        //data.width = widthSlider.value;
-        //data.height = heightSlider.value;
-        //data.tilePrefab = tilePrefabField.value as GameObject;
-        //data.cornerPrefab = cornerPrefabField.value as GameObject;
-        //data.placedBlocksData = new List<Blocks>(placedPrefabs);
+        var data = CreateInstance<LvlDataSO>();
+        data.width = widthSlider.value;
+        data.height = heightSlider.value;
+        data.tilePrefab = tilePrefabField.value as GameObject;
+        data.cornerPrefab = cornerPrefabField.value as GameObject;
+        data.placedBlocksData = new List<Blocks>(placedPrefabs);
 
-
-        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO/SO_{widthSlider.value}x{heightSlider.value}.prefab");
+        string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Scripts/SO/SO_{widthSlider.value}x{heightSlider.value}.asset");
         PrefabUtility.SaveAsPrefabAsset(parentObj, path);
 
-        //AssetDatabase.CreateAsset(data, path);
-        //AssetDatabase.SaveAssets();
-        //AssetDatabase.Refresh();
+        AssetDatabase.CreateAsset(data, path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     private void LoadLevelData()
