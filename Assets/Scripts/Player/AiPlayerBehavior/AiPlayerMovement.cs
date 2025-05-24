@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiPlayer : MonoBehaviour
+public class AiPlayerMovement : AiPlayerBase
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float sleepTime = 1f;
@@ -59,5 +59,20 @@ public class AiPlayer : MonoBehaviour
         }
 
         MoveTo();
+    }
+
+    public override void OnEnterState(AiPlayerManager AiPlayer)
+    {
+        
+    }
+
+    public override void OnUpdtaeState(AiPlayerManager AiPlayer)
+    {
+        
+    }
+
+    public override void OnColliderState(AiPlayerManager AiPlayer)
+    {
+        
     }
 }
